@@ -1,0 +1,51 @@
+<h1>Order Confirmation</h1>
+
+<p>
+Order ID: <%= @order.id %><br>
+Total: ₹ <%= @order.total %><br>
+<p>Payment Status: <%= @order.payment_status %></p>
+<p>Order Status: <%= @order.status %></p>
+</p>
+
+<% if @order.payment_status == "pending" %>
+
+<button id="pay-btn">Pay Now</button>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+var options = {
+  "key": "<%= Rails.application.credentials.razorpay[:key_id] %>",
+  "amount": "<%= (@order.total * 100).to_i %>",
+  "currency": "INR",
+  "order_id": "<%= @order.razorpay_order_id %>",
+
+  "handler": function (response){
+
+    fetch("/orders/payment_success", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-Token": "<%= form_authenticity_token %>"
+      },
+      body: JSON.stringify({
+        razorpay_payment_id: response.razorpay_payment_id,
+        razorpay_order_id: response.razorpay_order_id,
+        razorpay_signature: response.razorpay_signature
+      })
+    }).then(() => {
+      window.location.reload();
+    });
+
+  }
+};
+
+var rzp = new Razorpay(options);
+
+document.getElementById("pay-btn").onclick = function(e){
+  rzp.open();
+  e.preventDefault();
+};
+</script>
+
+<% end %>

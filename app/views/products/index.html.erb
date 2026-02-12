@@ -1,0 +1,15 @@
+<h1>Shop</h1>
+
+<ul>
+  <% @products.each do |product| %>
+  <li>
+    <strong><%= link_to product.name, product_path(product) %></strong><br>
+    Price: ₹ <%= product.price %><br>
+    Category: <%= product.category.name %><br>
+
+    <%= button_to "Add to Cart",
+        add_cart_path(product),
+        method: :post %>
+  </li>
+  <hr>
+<% end %>

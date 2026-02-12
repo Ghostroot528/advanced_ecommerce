@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Advanced Ecommerce</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+  <body>
+
+    <nav style="padding:10px; background:#eee;">
+      
+      <%= link_to "Home", root_path %> |
+      <%= link_to "Cart", cart_path %> |
+
+      <% if user_signed_in? %>
+
+        Logged in as <strong><%= current_user.email %></strong> |
+
+        <% if current_user.admin? %>
+          <%= link_to "Admin Panel", admin_orders_path %> |
+        <% end %>
+
+        <%= button_to "Logout",
+              destroy_user_session_path,
+              method: :delete,
+              form: { style: "display:inline" } %>
+
+      <% else %>
+
+        <%= link_to "Login", new_user_session_path %> |
+        <%= link_to "Sign Up", new_user_registration_path %>
+
+      <% end %>
+
+    </nav>
+
+    <% if notice %>
+      <p style="color:green;"><%= notice %></p>
+    <% end %>
+
+    <% if alert %>
+      <p style="color:red;"><%= alert %></p>
+    <% end %>
+
+    <%= yield %>
+
+  </body>
+</html>

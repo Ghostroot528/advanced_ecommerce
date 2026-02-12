@@ -1,0 +1,15 @@
+<h1>Checkout</h1>
+
+<% @products.each do |product| %>
+  <p>
+    <strong><%= product.name %></strong><br>
+    Quantity: <%= @cart[product.id.to_s] %><br>
+    Price: ₹ <%= product.price %>
+  </p>
+  <hr>
+<% end %>
+
+<%= button_to "Place Order",
+    orders_path,
+    method: :post,
+    data: { turbo: false } %>

@@ -1,0 +1,21 @@
+<h1>Admin – Orders</h1>
+
+<table border="1" cellpadding="8">
+  <tr>
+    <th>Order ID</th>
+    <th>User</th>
+    <th>Total</th>
+    <th>View</th>
+  </tr>
+
+  <% @orders.each do |order| %>
+    <tr>
+      <td><%= order.id %></td>
+      <td><%= order.user&.email || "Guest / Missing User" %></td>
+      <td>₹ <%= order.total %></td>
+      <td>
+        <%= link_to "View", admin_order_path(order) %>
+      </td>
+    </tr>
+  <% end %>
+</table>

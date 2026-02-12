@@ -1,0 +1,15 @@
+<h1>Admin Products</h1>
+
+<p>
+  <%= link_to "New Product", new_admin_product_path %>
+</p>
+
+<ul>
+  <% @products.each do |product| %>
+    <li>
+      <strong><%= product.name %></strong> |
+      ₹ <%= product.price %> |
+      <%= product.category.name %>
+    </li>
+  <% end %>
+</ul>

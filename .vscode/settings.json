@@ -1,0 +1,11 @@
+{
+  "ruby.useLanguageServer": true,
+  "ruby.lsp.enabled": true,
+  "ruby.lsp.serverPath": "bundle",
+  "ruby.lsp.serverArgs": ["exec", "ruby-lsp"],
+  "ruby.interpreter.commandPath": "ruby",
+  "ruby.format": "rubocop",
+  "[ruby]": {
+    "editor.formatOnSave": true
+  }
+}

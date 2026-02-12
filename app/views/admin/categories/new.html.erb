@@ -1,0 +1,12 @@
+<h1>New Category</h1>
+
+<%= form_with model: [:admin, @category], local: true do |f| %>
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <%= f.submit "Create Category" %>
+  </p>
+<% end %>

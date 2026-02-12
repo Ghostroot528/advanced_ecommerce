@@ -1,0 +1,15 @@
+<h1>My Orders</h1>
+
+<% if @orders.any? %>
+  <ul>
+    <% @orders.each do |order| %>
+      <li>
+        Order #<%= order.id %> |
+        ₹ <%= order.total %> |
+        <%= link_to "View", order_path(order) %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>You have no orders yet.</p>
+<% end %>

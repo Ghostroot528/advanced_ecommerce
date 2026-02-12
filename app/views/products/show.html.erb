@@ -1,0 +1,13 @@
+<h1><%= @product.name %></h1>
+
+<p>
+  <strong>Price:</strong>
+  ₹ <%= @product.price %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @product.category.name %>
+</p>
+
+<%= link_to "Back to Shop", root_path %>
