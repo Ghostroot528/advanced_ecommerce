@@ -8,7 +8,7 @@ class Order < ApplicationRecord
   }
 
   enum :status, {
-    order_pending: "pending",
+    placed: "placed",
     shipped: "shipped",
     delivered: "delivered"
   }

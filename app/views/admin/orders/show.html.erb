@@ -1,18 +1,15 @@
-<h1>Admin – Order #<%= @order.id %></h1>
+<h1>Admin – Order <%= @order.id %></h1>
 
 <p>
 User: <%= @order.user.email %><br>
 Total: ₹ <%= @order.total %><br>
 Payment Status: <%= @order.payment_status %><br>
-Order Status: <%= @order.status %>
+Current Status: <%= @order.status %>
 </p>
 
 <h3>Update Order Status</h3>
 
 <%= form_with model: [:admin, @order], method: :patch do |f| %>
-
   <%= f.select :status, Order.statuses.keys %>
-
   <%= f.submit "Update Status" %>
-
 <% end %>

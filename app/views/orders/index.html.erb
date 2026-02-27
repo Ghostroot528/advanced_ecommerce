@@ -1,15 +1,25 @@
 <h1>My Orders</h1>
 
 <% if @orders.any? %>
-  <ul>
+  <table border="1" cellpadding="10">
+    <tr>
+      <th>Order ID</th>
+      <th>Total</th>
+      <th>Payment</th>
+      <th>Status</th>
+      <th>View</th>
+    </tr>
+
     <% @orders.each do |order| %>
-      <li>
-        Order #<%= order.id %> |
-        ₹ <%= order.total %> |
-        <%= link_to "View", order_path(order) %>
-      </li>
+      <tr>
+        <td><%= order.id %></td>
+        <td>₹ <%= order.total %></td>
+        <td><%= order.payment_status %></td>
+        <td><%= order.status %></td>
+        <td><%= link_to "View", order_path(order) %></td>
+      </tr>
     <% end %>
-  </ul>
+  </table>
 <% else %>
-  <p>You have no orders yet.</p>
+  <p>No orders yet.</p>
 <% end %>
