@@ -3,7 +3,7 @@ class Admin::OrdersController < ApplicationController
   before_action :require_admin
 
   def index
-    @orders = Order.order(created_at: :desc)
+    @orders = Order.includes(:user).order(created_at: :desc)
   end
 
   def show
@@ -12,12 +12,8 @@ class Admin::OrdersController < ApplicationController
 
   def update
     @order = Order.find(params[:id])
-
-    if @order.update(status: params[:order][:status])
-      redirect_to admin_order_path(@order), notice: "Order updated"
-    else
-      render :show
-    end
+    @order.update(status: params[:status])
+    redirect_to admin_order_path(@order), notice: "Order status updated"
   end
 
   private

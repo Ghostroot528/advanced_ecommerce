@@ -1,6 +1,9 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+  @orders = current_user.orders.order(created_at: :desc)
+  end
   def new
     @cart = session[:cart] || {}
     @products = Product.where(id: @cart.keys)

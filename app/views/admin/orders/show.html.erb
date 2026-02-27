@@ -3,13 +3,15 @@
 <p>
 User: <%= @order.user.email %><br>
 Total: ₹ <%= @order.total %><br>
-Payment Status: <%= @order.payment_status %><br>
+Payment: <%= @order.payment_status %><br>
 Current Status: <%= @order.status %>
 </p>
 
-<h3>Update Order Status</h3>
+<h3>Update Status</h3>
 
-<%= form_with model: [:admin, @order], method: :patch do |f| %>
-  <%= f.select :status, Order.statuses.keys %>
-  <%= f.submit "Update Status" %>
+<%= form_with url: admin_order_path(@order), method: :patch do %>
+  <%= select_tag :status,
+      options_for_select(Order.statuses.keys, @order.status) %>
+
+  <%= submit_tag "Update" %>
 <% end %>
