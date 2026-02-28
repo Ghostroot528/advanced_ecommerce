@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
 
   def index
-  @orders = current_user.orders.order(created_at: :desc)
+    @orders = current_user.orders.order(created_at: :desc)
   end
   def new
     @cart = session[:cart] || {}
@@ -40,7 +40,7 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @order = Order.find(params[:id])
+    @order = current_user.orders.find(params[:id])
     @razorpay_key = Rails.application.credentials.dig(:razorpay, :key_id)
   end
 end

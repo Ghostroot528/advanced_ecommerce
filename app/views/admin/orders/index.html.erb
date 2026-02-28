@@ -1,21 +1,30 @@
-<h1>Admin – Orders</h1>
+<h1>Admin Dashboard</h1>
 
-<table border="1" cellpadding="8">
+<p>
+Total Orders: <%= @total_orders %><br>
+Total Revenue: ₹ <%= @total_revenue %>
+</p>
+
+<hr>
+
+<table border="1" cellpadding="10">
   <tr>
-    <th>Order ID</th>
+    <th>ID</th>
     <th>User</th>
     <th>Total</th>
+    <th>Payment</th>
+    <th>Status</th>
     <th>View</th>
   </tr>
 
   <% @orders.each do |order| %>
     <tr>
-      <td><%= order.id %></td>
-      <td><%= order.user&.email || "Guest / Missing User" %></td>
+      <td>#<%= order.id %></td>
+      <td><%= order.user.email %></td>
       <td>₹ <%= order.total %></td>
-      <td>
-        <%= link_to "View", admin_order_path(order) %>
-      </td>
+      <td><%= order.payment_status %></td>
+      <td><%= order.status %></td>
+      <td><%= link_to "View", admin_order_path(order) %></td>
     </tr>
   <% end %>
 </table>

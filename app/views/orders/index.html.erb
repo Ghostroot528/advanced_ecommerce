@@ -1,25 +1,38 @@
 <h1>My Orders</h1>
 
-<% if @orders.any? %>
-  <table border="1" cellpadding="10">
-    <tr>
-      <th>Order ID</th>
-      <th>Total</th>
-      <th>Payment</th>
-      <th>Status</th>
-      <th>View</th>
-    </tr>
+<table border="1" cellpadding="10">
+  <tr>
+    <th>ID</th>
+    <th>Total</th>
+    <th>Payment</th>
+    <th>Status</th>
+    <th>Action</th>
+  </tr>
 
-    <% @orders.each do |order| %>
-      <tr>
-        <td><%= order.id %></td>
-        <td>₹ <%= order.total %></td>
-        <td><%= order.payment_status %></td>
-        <td><%= order.status %></td>
-        <td><%= link_to "View", order_path(order) %></td>
-      </tr>
-    <% end %>
-  </table>
-<% else %>
-  <p>No orders yet.</p>
-<% end %>
+  <% @orders.each do |order| %>
+    <tr>
+      <td>#<%= order.id %></td>
+      <td>₹ <%= order.total %></td>
+
+      <td>
+        <% if order.paid? %>
+          <span style="color: green;">Paid</span>
+        <% else %>
+          <span style="color: red;">Pending</span>
+        <% end %>
+      </td>
+
+      <td>
+        <% if order.delivered? %>
+          <span style="color: green;">Delivered</span>
+        <% elsif order.shipped? %>
+          <span style="color: orange;">Shipped</span>
+        <% else %>
+          <span style="color: blue;">Placed</span>
+        <% end %>
+      </td>
+
+      <td><%= link_to "View", order_path(order) %></td>
+    </tr>
+  <% end %>
+</table>

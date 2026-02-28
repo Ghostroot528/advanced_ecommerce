@@ -4,6 +4,8 @@ class Admin::OrdersController < ApplicationController
 
   def index
     @orders = Order.includes(:user).order(created_at: :desc)
+    @total_orders = Order.count
+    @total_revenue = Order.where(payment_status: "paid").sum(:total)
   end
 
   def show
