@@ -69,3 +69,5 @@ gem "devise", "~> 5.0"
 gem "razorpay"
 
 gem "dotenv-rails", "~> 3.2"
+
+gem "letter_opener", "~> 1.10"

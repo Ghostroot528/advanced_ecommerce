@@ -8,7 +8,8 @@ class PaymentsController < ApplicationController
       payment_id: params[:razorpay_payment_id],
       payment_status: "paid"
     )
-
+    OrderMailer.order_confirmation(order).deliver_later
+    OrderMailer.admin_notification(order).deliver_later
     session[:cart] = {}
 
     render json: { status: "success" }
