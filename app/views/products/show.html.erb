@@ -1,5 +1,9 @@
 <h1><%= @product.name %></h1>
 
+<% if @product.images.attached? %>
+  <%= image_tag @product.images.first, width: 300 %>
+<% end %>
+
 <p>
   <strong>Price:</strong>
   ₹ <%= @product.price %>

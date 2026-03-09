@@ -1,0 +1,27 @@
+<%= form_with model: [:admin, @product], local: true, html: { multipart: true } do |form| %>
+
+  <div>
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :price %><br>
+    <%= form.number_field :price %>
+  </div>
+
+  <div>
+    <%= form.label :category_id %><br>
+    <%= form.collection_select :category_id, Category.all, :id, :name %>
+  </div>
+
+  <div>
+    <%= form.label :images %><br>
+    <%= form.file_field :images, multiple: true %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+
+<% end %>

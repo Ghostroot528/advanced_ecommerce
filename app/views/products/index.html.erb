@@ -1,15 +1,24 @@
+<%= form_with url: products_path, method: :get, local: true do %>
+  <%= text_field_tag :search, params[:search], placeholder: "Search products..." %>
+  <%= submit_tag "Search" %>
+<% end %>
+
 <h1>Shop</h1>
 
 <ul>
   <% @products.each do |product| %>
-  <li>
-    <strong><%= link_to product.name, product_path(product) %></strong><br>
-    Price: ₹ <%= product.price %><br>
-    Category: <%= product.category.name %><br>
+    <li>
+      <% if product.images.attached? %>
+        <%= image_tag url_for(product.images.first), width: 200 %>
+      <% end %>
+          
+      <strong><%= link_to product.name, product_path(product) %></strong><br>
+      Price: ₹ <%= product.price %><br>
+      Category: <%= product.category.name %><br>
 
-    <%= button_to "Add to Cart",
-        add_cart_path(product),
-        method: :post %>
-  </li>
-  <hr>
-<% end %>
+      <%= button_to "Add to Cart",
+          add_cart_path(product),
+          method: :post %>
+    </li>
+    <hr>
+  <% end %>
