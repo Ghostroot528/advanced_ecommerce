@@ -17,7 +17,7 @@
 
   <div>
     <%= form.label :images %><br>
-    <%= form.file_field :images, multiple: true %>
+    <%= form.file_field :images, multiple: true, name: "product[images][]" %>
   </div>
 
   <div>

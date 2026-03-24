@@ -3,6 +3,14 @@
   <%= submit_tag "Search" %>
 <% end %>
 
+<h3>Categories</h3>
+
+<%= link_to "All", root_path %> |
+
+<% @categories.each do |category| %>
+  <%= link_to category.name, root_path(category: category.id) %> |
+<% end %>
+
 <h1>Shop</h1>
 
 <ul>
@@ -22,3 +30,6 @@
     </li>
     <hr>
   <% end %>
+</ul>
+
+<%= paginate @products %>

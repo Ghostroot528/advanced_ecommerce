@@ -71,3 +71,5 @@ gem "razorpay"
 gem "dotenv-rails", "~> 3.2"
 
 gem "letter_opener", "~> 1.10"
+
+gem "kaminari", "~> 1.2"
