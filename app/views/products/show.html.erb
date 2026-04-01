@@ -1,5 +1,9 @@
 <h1><%= @product.name %></h1>
 
+<p>
+  Average Rating: ⭐ <%= @product.average_rating || "No ratings yet" %>
+</p>
+
 <% if @product.images.attached? %>
   <%= image_tag @product.images.first, width: 300 %>
 <% end %>
@@ -15,3 +19,42 @@
 </p>
 
 <%= link_to "Back to Shop", root_path %>
+
+<hr>
+
+<h3>Reviews</h3>
+
+<% @product.reviews.each do |review| %>
+  <p>
+    <strong><%= review.user.email %></strong>
+    ⭐ <%= review.rating %>/5
+    <br>
+    <%= review.comment %>
+  </p>
+
+  <% if review.user == current_user %>
+    <%= button_to "Delete", product_review_path(@product, review), method: :delete %>
+  <% end %>
+<% end %>
+
+<hr>
+
+<% if user_signed_in? %>
+  <h4>Add Review</h4>
+
+  <%= form_with(model: [@product, Review.new], local: true) do |f| %>
+    <div>
+      <%= f.label :rating %>
+      <%= f.select :rating, (1..5) %>
+    </div>
+
+    <div>
+      <%= f.label :comment %>
+      <%= f.text_area :comment %>
+    </div>
+
+    <%= f.submit "Submit Review" %>
+  <% end %>
+<% else %>
+  <p>Please login to add a review.</p>
+<% end %>

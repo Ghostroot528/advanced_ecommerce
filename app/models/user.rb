@@ -3,6 +3,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :orders
+  has_many :reviews, dependent: :destroy
 
   # admin? (boolean check) → returns true or false
   def admin?

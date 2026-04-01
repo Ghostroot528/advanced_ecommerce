@@ -8,7 +8,9 @@ Rails.application.routes.draw do
 
   root "products#index"
 
-  resources :products, only: [ :index, :show ]
+  resources :products do
+    resources :reviews, only: [:create, :destroy]
+  end
 
   get    "/cart", to: "cart#show"
   post   "/cart/add/:product_id", to: "cart#add", as: :add_cart
