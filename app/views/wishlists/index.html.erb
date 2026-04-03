@@ -1,0 +1,11 @@
+<h2>My Wishlist ❤️</h2>
+
+<% @wishlist_items.each do |product| %>
+  <div>
+    <h4><%= link_to product.name, product_path(product) %></h4>
+    <p><%= product.price %></p>
+
+    <%= button_to "Remove ❌", wishlist_path(product.id), method: :delete %>
+  </div>
+  <hr>
+<% end %>

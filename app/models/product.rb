@@ -4,6 +4,8 @@ class Product < ApplicationRecord
   has_many_attached :images
   has_many :reviews, dependent: :destroy
 
+  has_many :wishlists, dependent: :destroy
+
   def average_rating
     reviews.average(:rating)&.round(1)
   end

@@ -1,5 +1,13 @@
 <h1><%= @product.name %></h1>
 
+<% if user_signed_in? %>
+  <% if current_user.wishlist_products.include?(@product) %>
+    <%= button_to "Remove from Wishlist ❌", wishlist_path(@product.id), method: :delete %>
+  <% else %>
+    <%= button_to "Add to Wishlist ❤️", wishlists_path(product_id: @product.id), method: :post %>
+  <% end %>
+<% end %>
+
 <p>
   Average Rating: ⭐ <%= @product.average_rating || "No ratings yet" %>
 </p>
